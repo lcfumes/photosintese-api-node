@@ -1,0 +1,18 @@
+photosintese-api-node:
+    build: "./docker/"
+    ports:
+        - 80:3000
+    volumes:
+        - ./:/app
+    environment:
+        - VIRTUAL_HOST=dev.api.photosintese.com.br
+    tty: true
+    links:
+        - photosintese-api-mongo:mongodb.photosintese.com.br
+
+photosintese-api-mongo:
+    image: mongo:latest
+    ports:
+        - "27017:27017"
+    environment:
+        - VIRTUAL_HOST:mongodb.photosintese.com.br

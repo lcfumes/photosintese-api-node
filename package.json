@@ -1,0 +1,34 @@
+{
+  "name": "photosintese-api-node",
+  "version": "0.0.1",
+  "description": "",
+  "author": [
+    {
+      "name": "Luiz Fumes",
+      "email": "lcfumes@gmail.com",
+      "url": "http://fumes.com.br"
+    },
+    {
+      "name": "Andre Lopes",
+      "email": "oandreluizlopes@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lcfumes/photosintese-api-node.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lcfumes/photosintese-api-node/issues"
+  },
+  "homepage": "https://github.com/lcfumes/photosintese-api-node#readme",
+  "main": "server.js",
+  "scripts": {
+    "dev": "NODE_ENV=dev node-dev server.js",
+    "live": "NODE_ENV=live node server.js"
+  },
+  "dependencies": {
+    "hapi": "^16.1.0"
+  },
+  "devDependencies": {}
+}

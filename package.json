@@ -28,7 +28,9 @@
     "live": "NODE_ENV=live node server.js"
   },
   "dependencies": {
-    "hapi": "^16.1.0"
+    "cloudinary": "^1.7.1",
+    "hapi": "^16.1.0",
+    "mongoose": "^4.8.6"
   },
   "devDependencies": {}
 }

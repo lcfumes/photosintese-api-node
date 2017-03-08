@@ -1,4 +1,6 @@
 const RouterController = require('../controllers/RouterController');
+const LoginController = require('../controllers/LoginController');
+
 module.exports = [
   { 
   	method: 'GET', 
@@ -8,11 +10,11 @@ module.exports = [
   {
     method: 'POST',
     path: '/authenticate',
-    config: RouterController.configAuthenticate
+    config: LoginController.configAuthenticate
   },
   {
     method: 'GET',
     path: '/authenticate',
-    config: RouterController.configGetAuthenticate
+    config: LoginController.configGetAuthenticate
   }
 ]

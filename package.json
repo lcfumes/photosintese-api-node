@@ -31,6 +31,7 @@
     "cloudinary": "^1.7.1",
     "hapi": "^16.1.0",
     "joi": "^10.2.2",
+    "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.8.6"
   },
   "devDependencies": {}

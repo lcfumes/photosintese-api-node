@@ -6,10 +6,13 @@ let token = "";
 module.exports.setUser = (user) => {
 	this.user = {
     "_id": user.id,
-    "user": user.user,
+    "name": user.name,
+    "last_name": user.last_name,
+    "email": user.email,
     "created_at": user.created_at,
     "updated_at": user.updated_at,
   }
+  this.token = "";
 }
 
 module.exports.setToken = (token) => {
@@ -17,11 +20,9 @@ module.exports.setToken = (token) => {
 }
 
 module.exports.getUser = () => {
-  return {
-    "_id": this.user._id,
-    "user": this.user.user,
-    "created_at": this.user.created_at,
-    "updated_at": this.user.updated_at,
-    "token": this.token
-  }
+  let user = this.user;
+  if (this.token !== "") 
+    user['token'] = this.token;
+
+  return user;
 }

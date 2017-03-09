@@ -28,7 +28,7 @@ module.exports.verifyAuthentication = (request, next) => {
  */
 module.exports.authenticate = (request, reply) => {
   let userData = {
-    user: request.payload.user,
+    email: request.payload.email,
     password: crypto.createHash('md5').update(request.payload.password).digest("hex")
   };
 
@@ -64,17 +64,22 @@ module.exports.getAuthenticate = (request, reply) => {
 
 module.exports.createUser = (request, reply) => {
   let userData = {
-    user: request.payload.user,
+    name: request.payload.name,
+    last_name: request.payload.last_name,
+    email: request.payload.email,
     password: crypto.createHash('md5').update(request.payload.password).digest("hex")
   }
   usersModel.createUser(userData, (err, result, created) => {
     if(!err) {
-      let code = 201;
       if (!created) {
-        code =  302;
+        reply({
+          succes: false,
+          message: 'Email address already exists.'
+        }).code(409);
+      } else {
+        UserEntity.setUser(result);
+        reply(UserEntity.getUser()).code(201);
       }
-      UserEntity.setUser(result);
-      reply(UserEntity.getUser()).code(code);
     }
   })
 }
@@ -101,8 +106,8 @@ module.exports.configAuthenticate = {
 	handler: this.authenticate,
 	validate: {
 		payload: {
-			user: Joi.string().min(1).required(),
-      password: Joi.string().min(1).required()
+			email: Joi.string().required(),
+      password: Joi.string().required()
 		},
 		headers: Joi.object().keys({
       'content-type': Joi.string().required().valid(['application/json']).default('application/json')          
@@ -117,8 +122,10 @@ module.exports.configCreateUser = {
       'content-type': Joi.string().required().valid(['application/json']).default('application/json')          
     }).unknown(),
     payload: {
-      user: Joi.string().required(),
-      password: Joi.string().required()
+      name: Joi.string().min(1).required(),
+      last_name: Joi.string().min(1).required(),
+      email: Joi.string().min(1).required(),
+      password: Joi.string().min(1).required()      
     }
   }
 }

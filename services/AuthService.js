@@ -6,14 +6,13 @@ module.exports.tokenAuthorization = (server, options) => {
       const token = request.headers['x-access-token'];
       if (!token) {
         return reply({fim: "end"}).code(401);
-      } else {
-        jwt.verify(token, Config.authentication.secret, (err, decoded) => {
-          if (err) {
-            return reply().code(405);
-          }
-          reply.continue({ credentials: decoded });
-        })
       }
+      jwt.verify(token, Config.authentication.secret, (err, decoded) => {
+        if (err) {
+          return reply().code(405);
+        }
+        reply.continue({ credentials: decoded });
+      })
     }
   };
 };

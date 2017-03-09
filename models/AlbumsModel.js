@@ -11,25 +11,25 @@ module.exports.findAlbum = (album, callback) => {
 module.exports.createAlbum = (userId, albumData, callback) => {
   model.findOne({id_user: userId, name: albumData.name}, (err, album) => {
     if (err) {
-      callback(err)
-    } else {
-      if (album !== null) {
-        callback(err, {}, false)
-      } else {
-        let album = new model({
-          id_user: userId,
-          name: albumData.name,
-          description: albumData.description,
-          created_at: new Date().getTime(),
-          updated_at: new Date().getTime()
-        });
-
-        album.save((err, data) => {
-          if (!err) {
-            callback(err, data, true);
-          }
-        });
-      }
+      return callback(err)
     }
+    if (album !== null) {
+      return callback(err, {}, false)
+    }
+
+    let create = new model({
+      id_user: userId,
+      name: albumData.name,
+      description: albumData.description,
+      created_at: new Date().getTime(),
+      updated_at: new Date().getTime()
+    });
+
+    create.save((err, data) => {
+      if (err) {
+        return callback(err);
+      }
+      return callback(err, data, true);
+    });
   })
 }

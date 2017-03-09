@@ -19,28 +19,25 @@ module.exports.findUser = (userData, callback) => {
 module.exports.createUser = (userData, callback) => {
   model.findOne({email: userData.email}, (err, user) => {
     if (err) {
-      callback(err)
-    } else {
-      if (user !== null) {
-        callback(err, {}, false)
-      } else {
-        let user = new model({
-          name: userData.name,
-          last_name: userData.last_name,
-          email: userData.email,
-          password: userData.password,
-          created_at: new Date().getTime(),
-          updated_at: new Date().getTime()
-        });
-
-        user.save(err => {
-          if (!err) {
-            this.findUser(user, (err, user) => {
-              callback(err, user, true)
-            })
-          }
-        });
-      }
+      return callback(err);
     }
+    if (user !== null) {
+      return callback(err, {}, false);
+    }
+
+    let create = new model({
+      name: userData.name,
+      last_name: userData.last_name,
+      email: userData.email,
+      password: userData.password,
+      created_at: new Date().getTime(),
+      updated_at: new Date().getTime()
+    });
+
+    create.save((err, data) => {
+      if (!err) {
+        return callback(err, data, true)
+      }
+    });
   })
 }

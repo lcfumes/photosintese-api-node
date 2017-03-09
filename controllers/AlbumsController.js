@@ -12,14 +12,13 @@ module.exports.createAlbum = (request, reply) => {
       albumsModel.createAlbum(credentials.id, request.payload, (err, result, created) => {
         if(!err) {
           if (!created) {
-            reply({
+            return reply({
               succes: false,
               message: 'Already exists an album with the same names.'
             }).code(409);
-          } else {
-            AlbumEntity.setAlbum(result);
-            reply(AlbumEntity.getAlbum()).code(201);
           }
+          AlbumEntity.setAlbum(result);
+          reply(AlbumEntity.getAlbum()).code(201);
         }
       })
     }

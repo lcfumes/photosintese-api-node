@@ -15,8 +15,13 @@ database.connect(Config.database.connection);
 
 const Routes = require('./config/routes');
 
+const AuthService = require('./services/AuthService');
+
 const server = new Hapi.Server();
 server.connection({ port: 3000 });
+
+server.auth.scheme('custom', AuthService.tokenAuthorization);
+server.auth.strategy('token', 'custom');
 
 server.route(Routes);
 

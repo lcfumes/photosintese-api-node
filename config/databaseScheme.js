@@ -6,3 +6,11 @@ module.exports.users = {
   created_at: Date,
   updated_at: Date
 }
+
+module.exports.albums = {
+	id_user: String,
+	name: String,
+	description: String,
+	created_at: Date,
+	updated_at: Date
+}

@@ -5,7 +5,7 @@ let token = "";
 
 module.exports.setUser = (user) => {
 	this.user = {
-    "_id": user.id,
+    "id": user.id,
     "name": user.name,
     "last_name": user.last_name,
     "email": user.email,

@@ -7,23 +7,6 @@ const UserEntity = require('../entities/UserEntity');
 const crypto = require('crypto');
 
 /**
- * pre
- */
-module.exports.verifyAuthentication = (request, next) => {
-	let token = request.headers['x-access-token'];
-
-	jwt.verify(token, Config.authentication.secret, (err, decoded) => {
-		request.error = true;
-		request.decoded = "";
-		if (!err) {
-			request.error = false;
-			request.decoded = decoded;
-		}
-		next();
-	})
-}
-
-/**
  * handlers
  */
 module.exports.authenticate = (request, reply) => {
@@ -39,7 +22,10 @@ module.exports.authenticate = (request, reply) => {
       } else {
         let token = jwt.sign({
            exp: Math.floor(Date.now() / 1000) + (60 * 60),
-           user: request.payload.user
+           id: user.id,
+           name: user.name,
+           last_name: user.last_name,
+           email: user.email
          }, 
          Config.authentication.secret
         );
@@ -52,14 +38,13 @@ module.exports.authenticate = (request, reply) => {
 }
 
 module.exports.getAuthenticate = (request, reply) => {
-	let code = 200;
-  if (!request.error) {
-    code = 405;
-  }
-  reply({
-		success: !request.error,
-		userInfo: request.decoded
-	}).code(code);
+	request.server.auth.test('token', request, (err, credentials) => {
+    if (err) {
+      return reply().code(500);
+    } else {
+      return reply(credentials);
+    }
+  });
 }
 
 module.exports.createUser = (request, reply) => {
@@ -88,11 +73,7 @@ module.exports.createUser = (request, reply) => {
  * configs
  */
 module.exports.configGetAuthenticate = {
-	pre: [
-		[{
-			method: this.verifyAuthentication
-		}]
-	],
+  auth: 'token',
 	handler: this.getAuthenticate,
 	validate: {
 		headers: Joi.object().keys({

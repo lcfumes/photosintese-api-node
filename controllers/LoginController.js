@@ -6,6 +6,9 @@ const usersModel = require('../models/UsersModel');
 const UserEntity = require('../entities/UserEntity');
 const crypto = require('crypto');
 
+/**
+ * pre
+ */
 module.exports.verifyAuthentication = (request, next) => {
 	let token = request.headers['x-access-token'];
 
@@ -13,10 +16,8 @@ module.exports.verifyAuthentication = (request, next) => {
 		request.error = true;
 		request.decoded = "";
 		if (!err) {
-			if (decoded.user == request.headers['user']) {
-				request.error = false;
-				request.decoded = decoded;
-			}
+			request.error = false;
+			request.decoded = decoded;
 		}
 		next();
 	})
@@ -78,6 +79,7 @@ module.exports.createUser = (request, reply) => {
     }
   })
 }
+
 /**
  * configs
  */
@@ -91,8 +93,7 @@ module.exports.configGetAuthenticate = {
 	validate: {
 		headers: Joi.object().keys({
 			'content-type': Joi.string().required().valid(['application/json']).default('application/json'),
-			'x-access-token': Joi.string().required(),
-			'user': Joi.string().required()
+			'x-access-token': Joi.string().required()
 		}).unknown()
 	}
 }

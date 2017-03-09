@@ -73,9 +73,8 @@ module.exports.createUser = (request, reply) => {
       if (!created) {
         code =  302;
       }
-      reply({
-        user: result,
-      }).code(code);
+      UserEntity.setUser(result);
+      reply(UserEntity.getUser()).code(code);
     }
   })
 }

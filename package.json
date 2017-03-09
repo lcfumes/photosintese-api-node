@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "cloudinary": "^1.7.1",
+    "crypto": "0.0.3",
     "hapi": "^16.1.0",
     "joi": "^10.2.2",
     "jsonwebtoken": "^7.3.0",

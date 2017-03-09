@@ -8,13 +8,18 @@ module.exports = [
   	config: RouterController.getAll
   },
   {
-    method: 'POST',
-    path: '/authenticate',
-    config: LoginController.configAuthenticate
-  },
-  {
     method: 'GET',
     path: '/authenticate',
     config: LoginController.configGetAuthenticate
+  },
+  {
+    method: 'POST',
+    path: '/user/authenticate',
+    config: LoginController.configAuthenticate
+  },
+  {
+    method: 'POST',
+    path: '/user/create',
+    config: LoginController.configCreateUser
   }
 ]

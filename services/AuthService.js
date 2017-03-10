@@ -5,7 +5,7 @@ module.exports.tokenAuthorization = (server, options) => {
     authenticate: (request, reply) => {
       const token = request.headers['x-access-token'];
       if (!token) {
-        return reply({fim: "end"}).code(401);
+        return reply().code(401);
       }
       jwt.verify(token, Config.authentication.secret, (err, decoded) => {
         if (err) {

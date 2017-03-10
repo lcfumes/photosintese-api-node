@@ -8,11 +8,6 @@ module.exports = [
   	path: '/', 
   	config: RouterController.getAll
   },
-  // {
-  //   method: 'GET',
-  //   path: '/authenticate',
-  //   config: LoginController.configGetAuthenticate
-  // },
   {
     method: 'POST',
     path: '/user/authenticate',
@@ -27,5 +22,15 @@ module.exports = [
     method: 'POST',
     path: '/albums/create',
     config: AlbumsController.configCreateAlbum
+  },
+  {
+    method: 'GET',
+    path: '/albums',
+    config: AlbumsController.configListAlbums
+  },
+  {
+    method: 'GET',
+    path: '/albums/{id}',
+    config: AlbumsController.configListAlbum
   }
 ]

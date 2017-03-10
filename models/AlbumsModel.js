@@ -8,6 +8,18 @@ module.exports.findAlbum = (album, callback) => {
   model.findOne({id_user: album.id_user, name: album.name})
 }
 
+module.exports.listAlbums = (userId, callback) => {
+  model.find({"id_user": userId}, (err, albums) => {
+    callback(err, albums);
+  });
+}
+
+module.exports.listAlbum = (userId, id, callback) => {
+  model.findOne({"id_user": userId, "_id": id}, (err, album) => {
+    callback(err, album);
+  });
+}
+
 module.exports.createAlbum = (userId, albumData, callback) => {
   model.findOne({id_user: userId, name: albumData.name}, (err, album) => {
     if (err) {

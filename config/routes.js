@@ -22,6 +22,16 @@ module.exports = [
     path: '/user/create',
     config: LoginController.configCreateUser
   },
+  {
+    method: 'PUT',
+    path: '/user',
+    config: LoginController.configUpdateUser
+  },
+  {
+    method: 'DELETE',
+    path: '/user',
+    config: LoginController.configDeleteUser
+  },
   // Albums
   {
     method: 'POST',

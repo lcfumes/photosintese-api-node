@@ -72,7 +72,7 @@ module.exports.configCreatePicture = {
     },
 		headers: Joi.object().keys({
 			'content-type': Joi.string().required().valid(['application/json']).default('application/json'),
-			'x-access-token': Joi.string().required()
+			'x-access-token': Joi.string().required().description("Auth Token")
 		}).unknown()
 	}
 }

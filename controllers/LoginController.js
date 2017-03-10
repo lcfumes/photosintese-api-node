@@ -59,6 +59,10 @@ module.exports.createUser = (request, reply) => {
   })
 }
 
+module.exports.updateUser = (request, reply) => {
+
+}
+
 /**
  * configs
  */
@@ -87,6 +91,38 @@ module.exports.configCreateUser = {
   validate: {
     headers: Joi.object().keys({
       'content-type': Joi.string().required().valid(['application/json']).default('application/json')          
+    }).unknown(),
+    payload: {
+      name: Joi.string().min(1).required().description('User Name'),
+      last_name: Joi.string().min(1).required().description('User Last Name'),
+      email: Joi.string().min(1).required().description('User Email'),
+      password: Joi.string().min(1).required().description('User Password')
+    }
+  }
+}
+
+module.exports.configDeleteUser = {
+  handler: this.updateUser,
+  description: 'Delete an user',
+  notes: 'Delete an user @TODO',
+  tags: ['api', 'users', 'update'],
+  validate: {
+    headers: Joi.object().keys({
+      'content-type': Joi.string().required().valid(['application/json']).default('application/json'),
+      'x-access-token': Joi.string().required().description("Auth Token")
+    }).unknown()
+  }
+}
+
+module.exports.configUpdateUser = {
+  handler: this.updateUser,
+  description: 'Update an user',
+  notes: 'Update an user and returns all the information @TODO',
+  tags: ['api', 'users', 'update'],
+  validate: {
+    headers: Joi.object().keys({
+      'content-type': Joi.string().required().valid(['application/json']).default('application/json'),
+      'x-access-token': Joi.string().required().description("Auth Token")
     }).unknown(),
     payload: {
       name: Joi.string().min(1).required().description('User Name'),

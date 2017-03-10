@@ -4,19 +4,18 @@ let albums = {};
 let total = 0;
 
 module.exports.setAlbums = (albums) => {
+  this.albums = {
+    "total": 0,
+    "_embedded:": {}
+  };
+  
   if (albums === undefined) {
-    return this.albums = {
-      "total": 0,
-      "_embedded:": {}
-    };
+    return this.albums;
   }
-	let total = albums.length;
-  if (total != undefined) {
-    this.total = total;
-  }
-  if (total == undefined) {
-    this.total = (Object.keys(albums).length > 0) ? 1 : 0;
-  }
+
+  albums = Array.isArray(albums) ? albums : [ albums ]
+  this.total = albums.length;
+
   this.albums = {
     "total": this.total,
     "_embedded:": albums

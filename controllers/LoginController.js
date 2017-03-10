@@ -3,7 +3,7 @@
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const usersModel = require('../models/UsersModel');
-const UserEntity = require('../entities/UserEntity');
+const UsersEntity = require('../entities/UsersEntity');
 const crypto = require('crypto');
 
 /**
@@ -31,9 +31,9 @@ module.exports.authenticate = (request, reply) => {
      }, 
      Config.authentication.secret
     );
-    UserEntity.setUser(user);
-    UserEntity.setToken(token);
-    reply(UserEntity.getUser()).code(200);     
+    UsersEntity.setUsers(user);
+    UsersEntity.setToken(token);
+    reply(UsersEntity.getUsers()).code(200);     
   })
 }
 
@@ -63,8 +63,8 @@ module.exports.createUser = (request, reply) => {
         message: 'Email address already exists.'
       }).code(409);
     }
-    UserEntity.setUser(result);
-    reply(UserEntity.getUser()).code(201);
+    UsersEntity.setUsers(result);
+    reply(UsersEntity.getUsers()).code(201);
   })
 }
 

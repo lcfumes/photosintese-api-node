@@ -1,6 +1,8 @@
 const RouterController = require('../controllers/RouterController');
 const LoginController = require('../controllers/LoginController');
 const AlbumsController = require('../controllers/AlbumsController');
+const PicturesController = require('../controllers/PicturesController');
+
 
 module.exports = [
   { 
@@ -8,16 +10,19 @@ module.exports = [
   	path: '/', 
   	config: RouterController.getAll
   },
+  // Authentication
   {
     method: 'POST',
     path: '/user/authenticate',
     config: LoginController.configAuthenticate
   },
+  // User
   {
     method: 'POST',
     path: '/user/create',
     config: LoginController.configCreateUser
   },
+  // Albums
   {
     method: 'POST',
     path: '/albums/create',
@@ -32,5 +37,11 @@ module.exports = [
     method: 'GET',
     path: '/albums/{id}',
     config: AlbumsController.configListAlbum
+  },
+  // Pictures
+  {
+    method: 'POST',
+    path: '/pictures/{albumId}/create',
+    config: PicturesController.configCreatePicture
   }
 ]

@@ -37,15 +37,6 @@ module.exports.authenticate = (request, reply) => {
   })
 }
 
-module.exports.getAuthenticate = (request, reply) => {
-	request.server.auth.test('token', request, (err, credentials) => {
-    if (err) {
-      return reply().code(500);
-    }
-    return reply(credentials);
-  });
-}
-
 module.exports.createUser = (request, reply) => {
   let userData = {
     name: request.payload.name,
@@ -71,23 +62,16 @@ module.exports.createUser = (request, reply) => {
 /**
  * configs
  */
-module.exports.configGetAuthenticate = {
-  auth: 'token',
-	handler: this.getAuthenticate,
-	validate: {
-		headers: Joi.object().keys({
-			'content-type': Joi.string().required().valid(['application/json']).default('application/json'),
-			'x-access-token': Joi.string().required()
-		}).unknown()
-	}
-}
 
 module.exports.configAuthenticate = {
 	handler: this.authenticate,
+  description: 'Authenticate User',
+  notes: 'Authenticate a user and return one token if found',
+  tags: ['api', 'users', 'authenticate'],
 	validate: {
 		payload: {
-			email: Joi.string().required(),
-      password: Joi.string().required()
+			email: Joi.string().required().description('User Email'),
+      password: Joi.string().required().description('User Password')
 		},
 		headers: Joi.object().keys({
       'content-type': Joi.string().required().valid(['application/json']).default('application/json')          
@@ -97,15 +81,18 @@ module.exports.configAuthenticate = {
 
 module.exports.configCreateUser = {
   handler: this.createUser,
+  description: 'Create a new user',
+  notes: 'Create a new user and returns all the information',
+  tags: ['api', 'users', 'create'],
   validate: {
     headers: Joi.object().keys({
       'content-type': Joi.string().required().valid(['application/json']).default('application/json')          
     }).unknown(),
     payload: {
-      name: Joi.string().min(1).required(),
-      last_name: Joi.string().min(1).required(),
-      email: Joi.string().min(1).required(),
-      password: Joi.string().min(1).required()      
+      name: Joi.string().min(1).required().description('User Name'),
+      last_name: Joi.string().min(1).required().description('User Last Name'),
+      email: Joi.string().min(1).required().description('User Email'),
+      password: Joi.string().min(1).required().description('User Password')
     }
   }
 }

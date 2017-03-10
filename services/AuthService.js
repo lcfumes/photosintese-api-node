@@ -9,7 +9,7 @@ module.exports.tokenAuthorization = (server, options) => {
       }
       jwt.verify(token, Config.authentication.secret, (err, decoded) => {
         if (err) {
-          return reply().code(405);
+          return reply().code(401);
         }
         reply.continue({ credentials: decoded });
       })

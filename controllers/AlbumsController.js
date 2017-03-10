@@ -57,14 +57,17 @@ module.exports.listAlbum = (request, reply) => {
 module.exports.configCreateAlbum = {
   auth: 'token',
 	handler: this.createAlbum,
+  description: 'Create a new album of user',
+  notes: 'Create a new album of user and returns all the information',
+  tags: ['api', 'albums', 'create'],
 	validate: {
     payload: {
-      name: Joi.string().required(),
-      description: Joi.string().required()
+      name: Joi.string().required().description('Album name'),
+      description: Joi.string().required().description('Album description')
     },
 		headers: Joi.object().keys({
 			'content-type': Joi.string().required().valid(['application/json']).default('application/json'),
-			'x-access-token': Joi.string().required()
+			'x-access-token': Joi.string().required().description('Auth Token')
 		}).unknown()
 	}
 }
@@ -72,10 +75,13 @@ module.exports.configCreateAlbum = {
 module.exports.configListAlbums = {
   auth: 'token',
   handler: this.listAlbums,
+  description: 'Return all albums of user',
+  notes: 'Returns total and all albums of user if found',
+  tags: ['api', 'albums', 'list'],
   validate: {
     headers: Joi.object().keys({
       'content-type': Joi.string().required().valid(['application/json']).default('application/json'),
-      'x-access-token': Joi.string().required()
+      'x-access-token': Joi.string().required().description('Auth Token'),
     }).unknown()
   }
 }
@@ -83,13 +89,16 @@ module.exports.configListAlbums = {
 module.exports.configListAlbum = {
   auth: 'token',
   handler: this.listAlbum,
+  description: 'Returns one specific album of user',
+  notes: 'Returns total and album of user if found',
+  tags: ['api', 'albums', 'list'],
   validate: {
     params: {
-      id: Joi.string().required()
+      id: Joi.string().required().description('Album ID')
     },
     headers: Joi.object().keys({
       'content-type': Joi.string().required().valid(['application/json']).default('application/json'),
-      'x-access-token': Joi.string().required()
+      'x-access-token': Joi.string().required().description('Auth Token')
     }).unknown()
   }
 }

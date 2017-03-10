@@ -22,7 +22,17 @@ module.exports.getAllDocuments = (request, reply) => {
  * configs
  */
 module.exports.getAll = {
-  handler: this.getAllDocuments, 
+  handler: this.getAllDocuments,
+  description: 'Informations of the API',
+  notes: 'Return informations about the API',
+  tags: ['api', 'api'],
+  plugins: {
+    'hapi-swagger': {
+      responses: {
+        '200': {}
+      }
+    }
+  },
   validate: {
     headers: Joi.object().keys({
       'content-type': Joi.string().required().valid(['application/json']).default('application/json')          

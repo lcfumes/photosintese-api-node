@@ -28,7 +28,7 @@
     "live": "NODE_ENV=live node server.js"
   },
   "dependencies": {
-    "cloudinary": "^1.7.1",
+    "cloudinary": "^1.8.0",
     "crypto": "0.0.3",
     "hapi": "^16.1.0",
     "hapi-swagger": "^7.7.0",

@@ -1,8 +1,0 @@
-{
-	"database": {
-		"connection": "mongodb://mongodb.photosintese.com.br/photosintese"
-	},
-	"authentication": {
-		"secret": "_#ph0t0s1nt3s3@"
-	}
-}

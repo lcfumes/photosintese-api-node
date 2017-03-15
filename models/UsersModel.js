@@ -5,18 +5,20 @@ const {users} = require("../config/databaseScheme.js");
 let model = database.model('Users', users, 'users');
 
 module.exports.totalDocs = callback => {
-	model.count({}, (err, count) => {
+	model.count({deleted_date: null}, (err, count) => {
     callback(err, count)
 	})
 }
 
 module.exports.findUser = (userData, callback) => {
+  userData.deleted_date = null;
   model.findOne(userData, (err, user) => {
     callback(err, user);
   })
 }
 
 module.exports.createUser = (userData, callback) => {
+  userData.deleted_date = null;
   model.findOne({email: userData.email}, (err, user) => {
     if (err) {
       return callback(err);

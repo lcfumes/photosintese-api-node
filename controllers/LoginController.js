@@ -59,6 +59,10 @@ module.exports.createUser = (request, reply) => {
   })
 }
 
+module.exports.deleteUser = (request, reply) => {
+
+}
+
 module.exports.updateUser = (request, reply) => {
 
 }
@@ -102,8 +106,8 @@ module.exports.configCreateUser = {
 }
 
 module.exports.configDeleteUser = {
-  handler: this.updateUser,
-  description: 'Delete an user',
+  handler: this.deleteUser,
+  description: 'Delete an user @TODO',
   notes: 'Delete an user @TODO',
   tags: ['api', 'users', 'update'],
   validate: {
@@ -116,7 +120,7 @@ module.exports.configDeleteUser = {
 
 module.exports.configUpdateUser = {
   handler: this.updateUser,
-  description: 'Update an user',
+  description: 'Update an user @TODO',
   notes: 'Update an user and returns all the information @TODO',
   tags: ['api', 'users', 'update'],
   validate: {

@@ -1,0 +1,13 @@
+{
+  "database": {
+    "connection": "mongodb://MONGO_URI/DBS"
+  },
+  "authentication": {
+    "secret": "SECRET-HASH-TO-AUTHENTICATION"
+  },
+  "cloudinary": {
+    "cloud_name": "", 
+    "api_key": "", 
+    "api_secret": ""
+  }
+}

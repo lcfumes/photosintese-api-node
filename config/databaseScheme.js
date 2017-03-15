@@ -4,7 +4,8 @@ module.exports.users = {
   email: String,
   password: String,
   created_at: Date,
-  updated_at: Date
+  updated_at: Date,
+  deleted_date: Date
 }
 
 module.exports.albums = {

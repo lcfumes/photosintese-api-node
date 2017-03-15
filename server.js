@@ -37,7 +37,7 @@ server.auth.strategy('token', 'custom');
 
 server.route(Routes);
 
-if (env === 'dev') {
+if (env === 'development') {
   server.register([
     Inert,
     Vision,

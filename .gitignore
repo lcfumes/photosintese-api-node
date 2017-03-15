@@ -1,2 +1,3 @@
 node_modules/
-config/config.prod.json
+config/config.production.json
+config/config.development.json
